@@ -263,6 +263,9 @@ function genConfig (name) {
   return config
 }
 
+// [rollup-cli]
+// --environment TARGET:web-full-dev
+// process.env.TARGET === 'web-full-dev'
 if (process.env.TARGET) {
   module.exports = genConfig(process.env.TARGET)
 } else {

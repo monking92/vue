@@ -10,6 +10,10 @@ if (!fs.existsSync('dist')) {
 
 let builds = require('./config').getAllBuilds()
 
+// process.argv:
+// [0]: process.execPath-启动nodejs进程的可执行文件的绝对路径名
+// [1]: 被执行的 javascript 文件路径
+// [2...]: 命令行参数
 // filter builds via command line arg
 if (process.argv[2]) {
   const filters = process.argv[2].split(',')
