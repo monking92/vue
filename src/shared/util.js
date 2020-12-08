@@ -159,6 +159,12 @@ export function cached<F: Function> (fn: F): F {
 }
 
 /**
+ * [sun]
+ * cached 代理模式（虚拟代理）
+ * 缓存处理过的字符串，之后再访问同名字符串时，直接返回缓存结果
+ * 减少 replace 处理，提高效率
+ * */
+/**
  * Camelize a hyphen-delimited string.
  */
 const camelizeRE = /-(\w)/g

@@ -14,6 +14,13 @@ const idToTemplate = cached(id => {
   return el && el.innerHTML
 })
 
+/**
+ * [sun] javascript 装饰者模式 给 $mount 动态添加职责
+ * （原先原型上的$mount 方法可以直接被runtime only 复用）：
+ * 1. 检测挂载点不能是 html、body根节点
+ * 2. options中有 render 方法则直接挂载
+ * 3. 没有 render 方法则将 template(没有则取el outHTML) 转换成 render 方法再挂载
+ */
 const mount = Vue.prototype.$mount
 Vue.prototype.$mount = function (
   el?: string | Element,

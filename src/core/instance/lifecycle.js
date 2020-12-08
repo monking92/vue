@@ -187,6 +187,9 @@ export function mountComponent (
     }
   } else {
     updateComponent = () => {
+      // [sun-20.12.08]
+      // 1.vm._render() 生成虚拟dom
+      // 2.vm._update() 更新dom
       vm._update(vm._render(), hydrating)
     }
   }
