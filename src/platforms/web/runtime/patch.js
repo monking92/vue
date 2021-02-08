@@ -9,4 +9,10 @@ import platformModules from 'web/runtime/modules/index'
 // built-in modules have been applied.
 const modules = platformModules.concat(baseModules)
 
+/**
+ * [sun-210105]
+ * 不同平台 weex web 的 `nodeOps` `modules` 不同
+ * 通过 `createPatchFunction` 实现函数柯里化固化差异化的参数（`nodeOps` `modules`）避免每次调用时传 `nodeOps` `modules`
+ * 
+ */
 export const patch: Function = createPatchFunction({ nodeOps, modules })

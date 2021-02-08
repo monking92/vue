@@ -98,6 +98,14 @@ const componentVNodeHooks = {
 
 const hooksToMerge = Object.keys(componentVNodeHooks)
 
+/**
+ * [sun-210120]
+ * 三个关键步骤：
+ * 1. 构造子类构造函数
+ * 2. 安装组件钩子函数
+ * 3. 实例化 vnode
+ *
+ */
 export function createComponent (
   Ctor: Class<Component> | Function | Object | void,
   data: ?VNodeData,
@@ -111,6 +119,8 @@ export function createComponent (
 
   const baseCtor = context.$options._base
 
+  // [sun-210201]
+  // 1. 构造子类构造函数
   // plain options object: turn it into a constructor
   if (isObject(Ctor)) {
     Ctor = baseCtor.extend(Ctor)
@@ -182,11 +192,15 @@ export function createComponent (
     }
   }
 
+  // [sun-210202]
+  // 2. 安装组件钩子函数
   // install component management hooks onto the placeholder node
   installComponentHooks(data)
 
   // return a placeholder vnode
   const name = Ctor.options.name || tag
+  // [sun-210202]
+  // 3. 实例化 VNode
   const vnode = new VNode(
     `vue-component-${Ctor.cid}${name ? `-${name}` : ''}`,
     data, undefined, undefined, undefined, context,
